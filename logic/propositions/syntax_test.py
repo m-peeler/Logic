@@ -54,7 +54,8 @@ def test_variables(debug=False):
              {'x'})]:
         if debug:
             print('Testing variables of', formula)
-        assert formula.variables() == expected_variables, str(formula.variables()) + " is not " + str(expected_variables)
+        assert formula.variables() == expected_variables, \
+            str(formula.variables()) + " is not the expected " + str(expected_variables)
 
 def test_operators(debug=False):
     for f, ops in [(Formula('T'), {'T'}),
@@ -66,7 +67,8 @@ def test_operators(debug=False):
                    (Formula('~', Formula('~', Formula('|', Formula('x'), Formula('~',Formula('x'))))),{'|', '~'})]:
         if debug:
             print ("Testing operators of", f)
-        assert f.operators() == ops, str(f.operators()) + " is not " + str(ops)
+        assert f.operators() == ops, \
+            str(f.operators()) + " is not the expected " + str(ops)
         
 parsing_tests = [('', None, ''),
                  ('x', 'x', ''),
@@ -111,11 +113,11 @@ def test_parse_prefix(debug=False):
             if debug:
                 print("... _parse_prefix correctly returned error message:", rr)
             continue
-        assert type(ff) is Formula
-        assert type(rr) is str
+        assert type(ff) is Formula, "The first portion of the return should be Formula but is not."
+        assert type(rr) is str, "The second portion of the return should be String but is not."
         ff = str(ff)
-        assert ff == f, "_parse_prefix parsed " + str(ff)
-        assert rr == r, "_parse_prefix did not parse " + rr
+        assert ff == f, "_parse_prefix parsed " + str(ff) + " but should have parsed " + str(f)
+        assert rr == r, "_parse_prefix left unparsed | " + rr + " | but should have unparsed | " + r + " |"
                      
 def test_is_formula(debug=False):
     if(debug):
@@ -124,9 +126,9 @@ def test_is_formula(debug=False):
         if debug:
             print("Testing is formula on", s)
         if f != None and r == '':
-            assert Formula.is_formula(s)
+            assert Formula.is_formula(s), "Expected a Formula but did not find one."
         else:
-            assert not Formula.is_formula(s)
+            assert not Formula.is_formula(s), "Expected to not be a Formula but was parsed as one."
                      
 def test_parse(debug=False):
     if(debug):
@@ -137,8 +139,10 @@ def test_parse(debug=False):
         if debug:
             print("Testing parsing ", s)
         ff = Formula.parse(s)
-        assert type(ff) is Formula
-        assert str(ff) == f
+        assert type(ff) is Formula, \
+             "The first portion of the return should be Formula but is not."
+        assert str(ff) == f, \
+            "_parse_prefix parsed " + str(ff) + " but should have parsed " + str(f)
 
 # Tests for optional tasks in Chapter 1
 

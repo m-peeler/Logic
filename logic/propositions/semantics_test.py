@@ -51,7 +51,8 @@ def test_evaluate(debug=False):
                 print('Testing evaluation of formula', formula, 'in model',
                       model)
             evaluation = evaluate(formula, frozendict(model))
-            assert evaluation == value, "Evaluation of " + str(evaluation) + " did not match expected " + str(value)
+            assert evaluation == value, \
+                "Evaluation of " + str(evaluation) + " did not match expected " + str(value)
 
 def test_all_models(debug=False):
     variables1 = ('p', 'q')
@@ -71,7 +72,8 @@ def test_all_models(debug=False):
                              (variables3, models3)]:
         if debug:
             print('Testing all models over', variables)
-        assert list(all_models(tuple(variables))) == models
+        assert list(all_models(tuple(variables))) == models, \
+             "Evaluation of " + str(list(all_models(tuple(variables)))) + " does not match " + str(models)
 
 def test_truth_values(debug=False):
     for infix,variables,values in [
@@ -167,7 +169,8 @@ def test_is_tautology(debug=False):
         formula = Formula.parse(infix)
         if debug:
             print('Testing whether', formula, 'is a tautology')
-        assert is_tautology(formula) == answer
+        assert is_tautology(formula) == answer, \
+            "Tautology should have been " + answer + " but was not."
 
 def test_is_contradiction(debug=False):
     for infix,answer in [['~(p&q7)', False], ['~(x|~x)', True],
@@ -177,7 +180,8 @@ def test_is_contradiction(debug=False):
         formula = Formula.parse(infix)
         if debug:
             print('Testing whether', formula, 'is a contradiction')
-        assert is_contradiction(formula) == answer
+        assert is_contradiction(formula) == answer, \
+            "Expected contradiction to be " + answer + "but it was not."
 
 def test_is_satisfiable(debug=False):
     for infix,answer in [['~(p&q7)', True], ['~(x|~x)', False],
@@ -187,7 +191,8 @@ def test_is_satisfiable(debug=False):
         formula = Formula.parse(infix)
         if debug:
             print('Testing whether', formula, 'is satisfiable')
-        assert is_satisfiable(formula) == answer
+        assert is_satisfiable(formula) == answer, \
+            "Expected " + answer + ", but got " + is_satisfiable(formula)
 
 def test_synthesize_for_model(debug=False):
     from propositions.semantics import _synthesize_for_model
@@ -338,7 +343,8 @@ def test_evaluate_all_operators(debug=False):
             if debug:
                 print('Testing evaluation of formula', formula, 'in model',
                       model)
-            assert evaluate(formula, frozendict(model)) == value
+            assert evaluate(formula, frozendict(model)) == value, \
+                "Evaluation did not match expectation of " + value
 
 def test_is_tautology_all_operators(debug=False):
     for infix,tautology in [['~(p-&q7)', False], ['(x<->~~x)', True],
@@ -347,7 +353,8 @@ def test_is_tautology_all_operators(debug=False):
         formula = Formula.parse(infix)
         if debug:
             print('Testing whether', formula, 'is a tautology')
-        assert is_tautology(formula) == tautology
+        assert is_tautology(formula) == tautology, \
+            "Expected " + tautology + " but got " + is_tautology(formula)
 
 def test_evaluate_inference(debug=False):
     from propositions.proofs import InferenceRule

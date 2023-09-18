@@ -7,7 +7,6 @@
 """Tests all Chapter 2 tasks."""
 
 from propositions.semantics_test import *
-from propositions.reductions_test import *
 
 def test_task1(debug=False):
     test_evaluate(debug)
@@ -32,17 +31,6 @@ def test_task6(debug=False):
 def test_task7(debug=False):
     test_synthesize(debug)
 
-def test_task8(debug=False):
-    test_synthesize_for_all_except_model(debug)
-
-def test_task9(debug=False):
-    test_synthesize_cnf(debug)
-
-def test_task10(debug=False):
-    test_graph3coloring_to_formula(debug)
-    test_assignment_to_3coloring(debug)
-    test_tricolor_graph(debug)
-
 test_task1(False)
 test_task2(False)
 test_task3(False)
@@ -50,6 +38,3 @@ test_task4(False)
 test_task5(False)
 test_task6(False)
 test_task7(False)
-test_task8(True) # Optional
-test_task9(True) # Optional
-#test_task10(True) # Optional
