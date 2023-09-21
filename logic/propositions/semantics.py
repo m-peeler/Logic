@@ -64,23 +64,23 @@ def evaluate(formula: Formula, model: Model) -> bool:
     assert is_model(model)
     assert formula.variables().issubset(variables(model))
     # Task 2.1
-    # if formula is None:
-    #     return False
-    # elif is_constant(formula.root):
-    #     return str(formula.root) == "T"
-    # elif is_variable(formula.root):
-    #     return model.get(formula.root)
-    # elif is_unary(formula.root):
-    #     return not evaluate(formula.first, model)
-    # elif is_binary(formula.root):
-    #     if str(formula.root) == "&":
-    #         return evaluate(formula.first, model) and evaluate(formula.second, model)
-    #     elif str(formula.root) == "|":
-    #         return evaluate(formula.first, model) or evaluate(formula.second, model)
-    #     elif str(formula.root) == "->":
-    #         return not (evaluate(formula.first, model) is True and evaluate(formula.second, model) is False)
-    # else:
-    #     return False
+    if formula is None:
+        return False
+    elif is_constant(formula.root):
+        return str(formula.root) == "T"
+    elif is_variable(formula.root):
+        return model.get(formula.root)
+    elif is_unary(formula.root):
+        return not evaluate(formula.first, model)
+    elif is_binary(formula.root):
+        if str(formula.root) == "&":
+            return evaluate(formula.first, model) and evaluate(formula.second, model)
+        elif str(formula.root) == "|":
+            return evaluate(formula.first, model) or evaluate(formula.second, model)
+        elif str(formula.root) == "->":
+            return not (evaluate(formula.first, model) is True and evaluate(formula.second, model) is False)
+    else:
+        return False
 
 def all_models(variables: Sequence[str]) -> Iterable[Model]:
     """Calculates all possible models over the given variable names.
